@@ -65,18 +65,20 @@
 
 
 
+// best block/thread parameters:
+// Tesla M2090        32/512
+// Tesla K20Xm        28/256
+// GeForce GTX980     128/256
+
+
 // blocksPerGrid, must be even
-#define GD 128
+#define GD 28
 // half of GD
-#define GD_HF 64
+#define GD_HF 14
 // threadsPerBlock
 #define BD 256
 
 
-
-
-
-#define MPIRANK_PER_NODE 2
 
 #endif /* PARAMETERS_H */
 

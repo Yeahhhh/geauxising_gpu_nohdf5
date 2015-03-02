@@ -56,7 +56,7 @@
 #define NPROB_MAX 16
 //typedef float PROB_DATATYPE;
 typedef uint32_t PROB_DATATYPE;
-//#define UINT32_MAX 0xffffffff
+#define UINT32_MAX 0xffffffff
 
 
 

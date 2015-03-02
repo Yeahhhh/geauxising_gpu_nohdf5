@@ -95,7 +95,7 @@ mc (float *temp_beta_shared, Parameter para, int iter)
 	    e = (e << 1) + ((c >> s) & MASK_S);
 	    MSC_DATATYPE flip = 0;
 
-	    //#pragma unroll
+//	    #pragma unroll
 	    for (int seg_offset = 0; seg_offset < SHIFT_MAX;
 		 seg_offset += NBIT_PER_SEG) {
 	      PROB_DATATYPE val =

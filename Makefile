@@ -1,65 +1,38 @@
-.SUFFIXES: .cu .cuh .h
 
 INC = -I. -I./include  -I./include/nvidia_gpucomputingsdk_4.2.9_c_common_inc
-LIBDIR = -L/opt/cuda/cuda-6.5/lib64
-LIB = -lcudart
+LIBDIR = -L/usr/local/packages/cuda/5.5.22/lib64
+#LIBDIR = -L/opt/cuda/cuda-6.5/lib64
 
 CC = gcc
 CPP = g++
 CXX = nvcc
-MPICC = h5pcc
 
-ARCHFLAG= -gencode=arch=compute_50,code=sm_50
-OPTFLAG0 = -O0 -g -G
-OPTFLAG1 = -O0
-OPTFLAG2 = -O2
-OPTFLAG3 = -O3
-PROFFLAG = --ptxas-options=-v -keep
+ARCHFLAG= -gencode arch=compute_35,code=sm_35 -Xptxas -dlcm=ca
+#ARCHFLAG= -gencode arch=compute_50,code=sm_50 -Xptxas -dlcm=ca
+OPTFLAG = -O3
+
 
 CFLAGS = $(INC) -std=c99
 CPPFLAGS = $(INC)
-CXXFLAGS = $(INC) $(LIB) $(LIBDIR) $(ARCHFLAG)
+CXXFLAGS = $(INC) $(LIBDIR) $(ARCHFLAG)
 
 srcdir = src
 gpusrc = kernel.cu
 cpusrc = host_main.cpp host_func.cpp host_launcher.cu
-exec = ising
 
-default: $(exec) 
-
-
-#.cu: Makefile
-#	$(CXX) $(CFLAGS) -o $@ $*.cu
-#
-
+default: ising
 
 %.o: %.c
-	$(CC) $(OPTFLAG2) $(CFLAGS) -c $<
+	$(CC) $(OPTFLAG) $(CFLAGS) -c $<
 
 %.o: %.cpp
-	$(CPP) $(OPTFLAG2) $(CPPFLAGS) -c $<
+	$(CPP) $(OPTFLAG) $(CPPFLAGS) -c $<
 
 %.o: %.cu
-	$(CXX) $(OPTFLAG2) $(CXXFLAGS) -c $<
-
-mpiprocess.o: mpiprocess.cpp
-	$(MPICC) -c $<
-
-mpi_ising: host_main.o mpiprocess.o host_func.o host_launcher.o kernel.o
-	$(MPICC) $(OPTFLAG2) $(LIB) $(LIBDIR) -o $@ $^
+	$(CXX) $(OPTFLAG) $(CXXFLAGS) -c $<
 
 ising: host_main.o host_func.o host_launcher.o kernel.o
-	$(CXX) $(OPTFLAG2) $(CXXFLAGS) -o $@ $^
-
-
-prof: $(gpusrc) $(cpusrc)
-	$(CXX) $(OPTFLAG1) $(CXXFLAGS) $(PROFFLAG) $^
-
-profclean: $(gpusrc) $(cpusrc)
-	$(CXX) $(OPTFLAG1) $(CXXFLAGS) $(PROFFLAG) -clean $^
-
-g_ising: $(gpusrc) $(cpusrc)
-	$(CXX) $(OPTFLAG0) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(OPTFLAG) $(CXXFLAGS) -o $@ $^
 
 clean:
 	rm -r *.o $(exec)

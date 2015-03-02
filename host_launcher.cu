@@ -107,8 +107,8 @@ host_launcher (float beta_low, float beta_high, char *mydir, int node,
     CUDAKERNELSYNC (kernel_warmup, GD, BD, para);
 
     t[0][1] = HostTimeNow ();
-    //sprintf (message, "n%03d d%d warmup %8d/%08d", node, device, i, ITER_WARMUP);
-    //host_report_speed (t[0][0], t[0][1], ITER_WARMUP_KERN, message);
+    sprintf (message, "n%03d d%d warmup %8d/%08d", node, device, i, ITER_WARMUP);
+    host_report_speed (t[0][0], t[0][1], ITER_WARMUP_KERN, message);
   }
 
   t2[1] = HostTimeNow ();
@@ -127,8 +127,8 @@ host_launcher (float beta_low, float beta_high, char *mydir, int node,
 
     t[2][1] = HostTimeNow ();
 
-    //sprintf (message, "n%03d d%d PT     %8d/%08d", node, device, i, ITER_SWAP);
-    //host_report_speed (t[1][0], t[1][1], ITER_SWAP_KERN, message);
+    sprintf (message, "n%03d d%d PT     %8d/%08d", node, device, i, ITER_SWAP);
+    host_report_speed (t[1][0], t[1][1], ITER_SWAP_KERN, message);
   }
   t2[2] = HostTimeNow ();
 
