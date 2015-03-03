@@ -77,6 +77,9 @@
 #define GD_HF 14
 // threadsPerBlock
 #define BD 256
+#define UNROLL_Z_MC 4
+#define UNROLL_Z_PT 8
+#define UNROLL_Z_MEAZURE 4
 
 
 
