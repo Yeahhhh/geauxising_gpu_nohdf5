@@ -7,6 +7,7 @@ CC = gcc
 CPP = g++
 CXX = nvcc
 
+#ARCHFLAG= -gencode arch=compute_20,code=sm_20
 ARCHFLAG= -gencode arch=compute_35,code=sm_35 -Xptxas -dlcm=ca
 #ARCHFLAG= -gencode arch=compute_50,code=sm_50 -Xptxas -dlcm=ca
 OPTFLAG = -O3

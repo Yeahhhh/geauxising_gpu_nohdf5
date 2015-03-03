@@ -29,10 +29,10 @@
 // NBETA * (16 ^ 3) * 16 * (2 * 10^6) * (50PS/spin) = 170 seconds
 
 
-#define ITER_WARMUP          40000
+#define ITER_WARMUP          20000
 #define ITER_WARMUP_KERN     5000
 #define ITER_WARMUP_KERNFUNC 200
-#define ITER_SWAP            40000
+#define ITER_SWAP            20000
 #define ITER_SWAP_KERN       5000
 #define ITER_SWAP_KERNFUNC   10
 
