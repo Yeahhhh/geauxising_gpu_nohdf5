@@ -56,7 +56,8 @@ mc (float *temp_beta_shared, Parameter para, int iter)
 	//const int xa = (x + L - 1) & (L - 1);
 	//const int xb = (x + 1) & (L - 1);
 
-#pragma unroll UNROLL_Z_MC
+// attention
+#pragma unroll 4
 	for (int z = tz; z < L; z += bdz) {
 	  const int za = (z + L - 1) % L;
 	  const int zb = (z + 1) % L;
@@ -192,7 +193,8 @@ pt (int *temp_idx_shared, float *temp_beta_shared, float *E, Parameter para,
     __syncthreads ();
 
 
-#pragma unroll UNROLL_Z_PT
+// attention
+#pragma unroll 4
     for (int z = tz; z < L; z += bdz) {
       int za = (z + L - 1) % L;
       int zb = (z + 1) % L;

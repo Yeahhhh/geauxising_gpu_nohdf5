@@ -29,11 +29,11 @@
 // NBETA * (16 ^ 3) * 16 * (2 * 10^6) * (50PS/spin) = 170 seconds
 
 
-#define ITER_WARMUP          10000
-#define ITER_WARMUP_KERN     1000
+#define ITER_WARMUP          40000
+#define ITER_WARMUP_KERN     5000
 #define ITER_WARMUP_KERNFUNC 200
-#define ITER_SWAP            10000
-#define ITER_SWAP_KERN       1000
+#define ITER_SWAP            40000
+#define ITER_SWAP_KERN       5000
 #define ITER_SWAP_KERNFUNC   10
 
 /*
@@ -77,9 +77,8 @@
 #define GD_HF 14
 // threadsPerBlock
 #define BD 256
-#define UNROLL_Z_MC 4
-#define UNROLL_Z_PT 8
-#define UNROLL_Z_MEAZURE 4
+
+// al check if unroll factors match thread parameters
 
 
 
